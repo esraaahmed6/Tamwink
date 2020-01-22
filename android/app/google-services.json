@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "398584296646",
+    "firebase_url": "https://tamwink-95ae5.firebaseio.com",
+    "project_id": "tamwink-95ae5",
+    "storage_bucket": "tamwink-95ae5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398584296646:android:cc7859c51fbd31318e93c7",
+        "android_client_info": {
+          "package_name": "com.example.tamwink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "398584296646-0r7np1q72198vu1fvj7kf7gbbq5rkid3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDi3P42bfJK4SBp8QN4SdbsgcNtblh_Tgg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "398584296646-0r7np1q72198vu1fvj7kf7gbbq5rkid3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
