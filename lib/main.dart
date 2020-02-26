@@ -1,144 +1,124 @@
-import 'package:flutter/cupertino.dart';
+import 'package:tamwink/Animation/FadeAnimation.dart';
 import 'package:flutter/material.dart';
-import 'package:tamwink/bottom_bar.dart';
-import 'package:tamwink/product_page.dart';
-import 'package:tamwink/order_page.dart';
-import 'package:tamwink/cash.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+void main() => runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Directionality( textDirection: TextDirection.rtl,
+        child: HomePage(),
       ),
-      home: MyHomePage(),
-    );
-  }
-}
+    )
+);
 
-class MyHomePage extends StatefulWidget {
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        elevation: 0.0,
-        centerTitle: true,
-        leading: IconButton(
-          icon:Icon(Icons.arrow_back,color:Colors.white),
-          onPressed: (){},
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                colors: [
+                  Colors.orange[900],
+                  Colors.orange[800],
+                  Colors.orange[400]
+                ]
+            )
         ),
-        title: Text('Tamwink',
-          style: TextStyle(
-            fontFamily: 'Varela',
-            fontSize: 20.0,
-            color:Colors.white,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon:Icon(Icons.notifications_none,color:Colors.white),
-            onPressed: (){},
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: EdgeInsets.only(left:20.0),
-        children: <Widget>[
-          SizedBox(height: 15.0,),
-          Text('Categories',
-            style: TextStyle(
-              fontFamily: 'Varela',
-              fontSize: 42.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 15.0,),
-          TabBar(
-            controller: _tabController,
-            indicatorColor: Colors.transparent,
-            labelColor: Colors.green,
-            isScrollable: true,
-            labelPadding: EdgeInsets.only(right: 45.0),
-            unselectedLabelColor: Color(0xFFCDCDCD),
-            tabs: [
-              Tab(
-                child: Text('Grains',
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 21.0,
-                    )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 80,),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                  FadeAnimation(1, Text("تموينك", style: TextStyle(color: Colors.white, fontSize: 40),)),
+              SizedBox(height: 10,),
+              FadeAnimation(1.3, Text("مرحبا بكم", style: TextStyle(color: Colors.white, fontSize: 15,))),
+                ],
               ),
-              Tab(
-                child: Text('Detergents',
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 21.0,
-                    )),
-              ),
-              Tab(
-                child: Text('Beverages',
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      fontSize: 21.0,
-                    )),
-              )],
 
-          ),
-          Container(
-              height: MediaQuery.of(context).size.height - 50.0,
-              width: double.infinity,
-              child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    ProductPage(),
-                    ProductPage(),
-                    ProductPage(),
-                  ]
-              )
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        backgroundColor: Colors.green,
-        child:IconButton(
-          icon: Icon(Icons.add_shopping_cart),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => OrderPage()
-            ));
-          },
+            ),
+            SizedBox(height: 20,),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(60), topRight: Radius.circular(60))
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(30),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 60,),
+                      FadeAnimation(1.4, Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [BoxShadow(
+                                color: Color.fromRGBO(225, 95, 27, .3),
+                                blurRadius: 20,
+                                offset: Offset(0, 10)
+                            )]
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey[200]))
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: "رقم الهاتف",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  border: Border(bottom: BorderSide(color: Colors.grey[200]))
+                              ),
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: "كلمة المرور",
+                                    hintStyle: TextStyle(color: Colors.grey),
+                                    border: InputBorder.none
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                      SizedBox(height: 40,),
+                      FadeAnimation(1.5, Text("نسيت كلمة المر,ر؟", style: TextStyle(color: Colors.grey),)),
+                      SizedBox(height: 40,),
+                      FadeAnimation(1.6, Container(
+                        height: 50,
+                        margin: EdgeInsets.symmetric(horizontal: 50),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.orange[900]
+                        ),
+                        child: Center(
+                          child: Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                        ),
+                      )),
+
+
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
         ),
-        //Tab(icon: Icon(Icons.add_shopping_cart)),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar : BottomBar(),
     );
   }
 }
-
-
