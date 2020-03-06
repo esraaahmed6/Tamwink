@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tamwink/regiter_page.dart';
 // import 'package:login_app/home_page.dart';
 // import 'package:login_app/register_page.dart';
-class LoginPage extends StatefulWidget {
-  static String tag ='Login-page';
+class Pwpage extends StatefulWidget {
+  static String tag ='pw-page';
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _PwpageState createState() => _PwpageState();
 }
 
-class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin{
+class _PwpageState extends State<Pwpage> {
   @override
 
   String dropval ;
@@ -365,7 +364,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 100,),
+            SizedBox(height: 80,),
             Padding(
               ////////////////////////////////////////////
               padding:EdgeInsets.all(20),
@@ -373,9 +372,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text("تموينك", style: TextStyle(color: Colors.white, fontSize: 40,),),
-                  SizedBox(height: 24,),
-                  Text("مرحبا بكم", style: TextStyle(color: Colors.white, fontSize: 18,),),
+                  Text("نسيت كلمة المرور", style: TextStyle(color: Colors.white, fontSize: 24,),),
+                  SizedBox(height: 10,),
+                  Text("اعادة تعيين", style: TextStyle(color: Colors.white, fontSize: 18,),),
 
                 ],
               ),
@@ -419,45 +418,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                                   ),
                                 ),
                               ),
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: Colors.grey[200]))
-                                ),
-                                child: TextField(
-                                  keyboardType: TextInputType.text,
-                                  decoration: InputDecoration(
-                                      hintText: " كلمة المرور",
-                                      hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none
-                                  ),
-                                ),
-                              ),
-
-
-
-
-                              Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: Colors.grey[200]))
-                                ),
-                              ),
                             ],
                           ),
                         ),
-                        SizedBox(height: 80,),
-                        Container(
-                          child: GestureDetector(
-                            onDoubleTap :(){
-                              Navigator.pushNamed(context, '/Pwpage');
-                            },
-                            child: Center(
-                              child: Text("نسيت كلمة المرور؟", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 100,),
                         Container(
                           height: 50,
                           margin: EdgeInsets.symmetric(horizontal: 50),
@@ -468,28 +432,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                           child: GestureDetector(
                             onDoubleTap :(){},
-                             // Navigator.of(context).pushNamed(Repage.tag);          },
+                            // Navigator.of(context).pushNamed(Repage.tag);          },
                             child: Center(
-                              child: Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              child: Text("ارسال", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                             ),
                           ),
                         ),
-                        SizedBox(height: 24,),
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        Container(
-                          child: MaterialButton(
-                            onPressed :(){
-                              Navigator.pushNamed(context, '/Repage');
-                              //Navigator.of(context).pushNamed(Repage.tag);
-                              },
-                            child: Center(
-                              child: Text("التسجيل كجديد", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
-                            ),
-                          ),
-                        ),
-                        ////////////////////////////////////////////////////////////////////////////////////
-                        SizedBox(height: 24,),
-
+                        SizedBox(height: 18,),
 
                       ],
                     ),
@@ -502,10 +451,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
       ),
     );
 
-/*
-    return Scaffold(
-      body: body,
-    );*/
   }
 }
 

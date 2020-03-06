@@ -2,6 +2,7 @@ import 'package:tamwink/Animation/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:tamwink/regiter_page.dart';
 import 'package:tamwink/login_page.dart';
+import 'package:tamwink/password_page.dart';
 ////////////////////////////////////////////////////////update>
 import 'package:flutter/material.dart';
 
@@ -33,9 +34,9 @@ class HomePage extends StatelessWidget {
     LoginPage.tag: (context)=>LoginPage(),
     LoginScreen.tag: (context)=>LoginScreen(),};*/
 
-  final routtes =<String , WidgetBuilder>{
+  /*final routtes =<String , WidgetBuilder>{
     LoginPage.tag: (context)=>LoginPage(),
-    Repage.tag: (context)=>Repage(),};
+    Repage.tag: (context)=>Repage(),};*/
 
   @override
 
@@ -44,8 +45,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: LoginPage(),
-      routes: routtes,
+      routes: <String, WidgetBuilder>{
+        '/Repage' :(context)=> Repage(),
+        '/Pwpage' :(context)=> Pwpage(),
 
+      }
 
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
