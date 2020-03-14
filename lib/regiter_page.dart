@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 // import 'package:login_app/home_page.dart';
 // import 'package:login_app/register_page.dart';
 class Repage extends StatefulWidget {

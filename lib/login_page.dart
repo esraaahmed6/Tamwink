@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tamwink/maincustomer.dart';
-import 'package:flutter/material.dart';
 import 'package:tamwink/regiter_page.dart';
 // import 'package:login_app/home_page.dart';
 // import 'package:login_app/register_page.dart';
