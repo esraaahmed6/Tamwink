@@ -33,7 +33,7 @@ class _OrderCardState extends State<OrderCard> {
                             color: Color(0xFFD3D3D3))),
                     Text(
                       "1",
-                      style: TextStyle(fontSize: 18.0, color: Colors.green),
+                      style: TextStyle(fontSize: 18.0, color: Colors.orange[900]),
                     ),
                     InkWell(
                         onTap: () {},
@@ -70,15 +70,15 @@ class _OrderCardState extends State<OrderCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Flour",
+                  "دقيق ",
                   style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 5.0),
                 Text(
-                  "\$ 9.99",
+                  "10 جنية",
                   style: TextStyle(
                       fontSize: 16.0,
-                      color: Colors.green,
+                      color: Colors.orange[900],
                       fontWeight: FontWeight.bold),
                 ),
 
@@ -91,7 +91,7 @@ class _OrderCardState extends State<OrderCard> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Text("400G",
+                          Text("400 جرام ",
                               style: TextStyle(
                                   color: Color(0xFFD3D3D3),
                                   fontWeight: FontWeight.bold)),
@@ -123,7 +123,7 @@ class _OrderCardState extends State<OrderCard> {
               onTap: () {},
               child: Icon(
                 Icons.delete,
-                color: Colors.green,
+                color: Colors.orange[900],
               ),
             ),
           ],

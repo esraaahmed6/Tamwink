@@ -20,37 +20,41 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            CreditCardWidget(cardNumber: cardNumber, expiryDate: expiryData, cardHolderName: cardHolderName, cvvCode: cvvCode, showBackView: isCvvFocused,
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              animationDuration: Duration(microseconds: 1000),
+    return
+      Directionality( textDirection: TextDirection.rtl,
+        child:
+        Scaffold(
+          resizeToAvoidBottomInset: true,
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                CreditCardWidget(cardNumber: cardNumber, expiryDate: expiryData, cardHolderName: cardHolderName, cvvCode: cvvCode, showBackView: isCvvFocused,
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  animationDuration: Duration(microseconds: 1000),
 
-            ),
-            new OutlineButton(
-              onPressed: null,
-              child: Text(
-                'proceed to pay',
-                style: TextStyle(color: Colors.lightGreen),
-              ),
-              shape: new RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-            ),
-            Expanded(child: SingleChildScrollView(
-              child: CreditCardForm(onCreditCardModelChange: onChange),
-            ),
+                ),
+                new OutlineButton(
+                  onPressed: null,
+                  child: Text(
+                    'تأكيد عملية الدفع',
+                    style: TextStyle(color: Colors.orange[900]),
+                  ),
+                  shape: new RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                Expanded(child: SingleChildScrollView(
+                  child: CreditCardForm(onCreditCardModelChange: onChange),
+                ),
+                ),
+
+              ],
             ),
 
-          ],
+          ),
         ),
-
-      ),
-    );
+      );
   }
   void onChange(CreditCardModel model){
     setState(() {

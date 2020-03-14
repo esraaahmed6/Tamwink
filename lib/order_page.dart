@@ -11,9 +11,12 @@ class OrderPage extends StatefulWidget {
 class _OrderPageState extends State<OrderPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+    child:
+      Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.orange[900],
         elevation: 0.0,
         centerTitle: true,
         leading: IconButton(
@@ -22,7 +25,7 @@ class _OrderPageState extends State<OrderPage> {
             Navigator.of(context).pop();
           },
         ),
-        title: Text('My Order',
+        title: Text('عربة التسوق',
           style: TextStyle(
             fontFamily: 'Varela',
             fontSize: 20.0,
@@ -42,17 +45,17 @@ class _OrderPageState extends State<OrderPage> {
         children: <Widget>[
           OrderCard(),
           OrderCard(),
-          OrderCard(),
         ],
       ),
 
       bottomNavigationBar: _buildTotalContainer(),
-    );
+    ),
+      );
   }
 
   Widget _buildTotalContainer() {
     return Container(
-      height: 220.0,
+      height: 250.0,
       padding: EdgeInsets.only(
         left: 10.0,
         right: 10.0,
@@ -64,14 +67,14 @@ class _OrderPageState extends State<OrderPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Subtotal",
+                "الإجمالي ",
                 style: TextStyle(
-                    color: Colors.green,
+                    color: Colors.orange[900],
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$ 30",
+                "30 جنية",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 16.0,
@@ -87,14 +90,14 @@ class _OrderPageState extends State<OrderPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                " Your Points",
+                " عدد النقاط ",
                 style: TextStyle(
-                    color: Colors.green,
+                    color: Colors.orange[900],
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "\$ 20",
+                "20 جنية",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 16.0,
@@ -130,7 +133,7 @@ class _OrderPageState extends State<OrderPage> {
           ),
           Divider(
             height: 2.0,
-            color: Colors.green,
+            color: Colors.orange[900],
           ),
           SizedBox(
             height: 20.0,
@@ -140,7 +143,7 @@ class _OrderPageState extends State<OrderPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                "Cart Total",
+                "السعر الكلي",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 16.0,
@@ -178,13 +181,13 @@ class _OrderPageState extends State<OrderPage> {
                         builder: (context) => Cash()
                     ));
                   },
-                  color: Colors.green,
+                  color: Colors.orange[900],
                   shape: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.lightGreen),
+                    borderSide: BorderSide(color: Colors.orange[900]),
                     borderRadius: BorderRadius.circular(30),
 
                   ),
-                  label: Text('Payment Cash',
+                  label: Text('الدفع عند الاستلام',
                     style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -201,7 +204,7 @@ class _OrderPageState extends State<OrderPage> {
             height: 35.0,
             child: FlatButton.icon(
               shape: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.lightGreen),
+                borderSide: BorderSide(color:Colors.orange[900]),
                 borderRadius: BorderRadius.circular(30),
 
               ),
@@ -211,8 +214,8 @@ class _OrderPageState extends State<OrderPage> {
                     builder: (context) => Payment()
                 ));
               },
-              color: Colors.green,
-              label: Text('Payment Credit',
+              color: Colors.orange[900],
+              label: Text('دفع بالبطاقة البنكية',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,

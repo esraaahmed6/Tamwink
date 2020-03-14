@@ -8,7 +8,7 @@ class BottomBar extends StatelessWidget
     return BottomAppBar(
       shape : CircularNotchedRectangle(),
         notchMargin: 6.0,
-      color: Colors.green,
+      color: Colors.white,
       elevation: 9.0,
       clipBehavior: Clip.antiAlias,
       child: Container(
@@ -18,7 +18,7 @@ class BottomBar extends StatelessWidget
             topLeft: Radius.circular(25.0),
             topRight: Radius.circular(25.0)
         ),
-        color: Colors.green
+        color: Colors.white
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,11 +29,11 @@ class BottomBar extends StatelessWidget
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Icon(Icons.home, color: Colors.white),
+                  Icon(Icons.home, color: Colors.orange[900]),
 
                   IconButton(
                     icon:  Icon(Icons.person_outline,
-                      color: Colors.white,
+                      color: Colors.orange[900],
 
                     ),
                     color: Colors.white,
@@ -53,8 +53,8 @@ class BottomBar extends StatelessWidget
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Icon(Icons.monetization_on, color: Colors.white),
-                  Icon(Icons.favorite_border, color: Colors.white)
+                  Icon(Icons.monetization_on, color: Colors.orange[900]),
+                  Icon(Icons.favorite_border, color: Colors.orange[900])
                 ],
               ),
 

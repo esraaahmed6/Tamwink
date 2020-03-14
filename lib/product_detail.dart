@@ -15,9 +15,12 @@ class ProductDetail extends StatelessWidget
   int _quantity = 1;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+    child:
+      Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.orange[900],
         elevation: 0.0,
         centerTitle: true,
         leading: IconButton(
@@ -26,7 +29,7 @@ class ProductDetail extends StatelessWidget
             Navigator.of(context).pop();
           },
         ),
-        title: Text('Tamwink',
+        title: Text('تموينك',
           style: TextStyle(
             fontFamily: 'Varela',
             fontSize: 20.0,
@@ -60,7 +63,7 @@ class ProductDetail extends StatelessWidget
                     fontFamily: 'Varela',
                     fontSize: 22.0,
                     fontWeight: FontWeight.bold,
-                    color: Colors.green)),
+                    color: Colors.orange[900])),
           ),
           SizedBox(height: 10.0),
           Center(
@@ -73,8 +76,9 @@ class ProductDetail extends StatelessWidget
           Center(
             child: Container(
               width: MediaQuery.of(context).size.width - 50.0,
-              child: Text('Italiano Small Rings Pasta - 400g,     '
-                  '  Brand: Italiano|',
+              child: Text(' مكرونة حلقات كبيرة - 400 جم '
+                  '  الماركة : Italiano|',
+
 
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -90,7 +94,7 @@ class ProductDetail extends StatelessWidget
             child: Column(
               children: <Widget>[
                 Container(
-                  child: Text('Quantity'
+                  child: Text('الكمية'
                       //, style: h6
                   ),
                   margin: EdgeInsets.only(bottom: 15),
@@ -100,7 +104,7 @@ class ProductDetail extends StatelessWidget
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      color: Colors.lightGreen,
+                      color: Colors.orange[900],
                       width: 55,
                       height: 45,
                       child: OutlineButton(
@@ -120,7 +124,7 @@ class ProductDetail extends StatelessWidget
                       ),
                     ),
                     Container(
-                      color: Colors.lightGreen,
+                      color: Colors.orange[900],
                       width: 55,
                       height: 45,
                       child: OutlineButton(
@@ -146,7 +150,7 @@ class ProductDetail extends StatelessWidget
                   height: 50.0,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25.0),
-                      color: Colors.lightGreen,
+                      color: Colors.orange[900],
                   ),
 
                   child: Center(
@@ -168,14 +172,14 @@ class ProductDetail extends StatelessWidget
       floatingActionButton: FloatingActionButton(
         onPressed: (){
         },
-        backgroundColor: Colors.green,
-        child: Icon(Icons.add_shopping_cart
-        ,
-        ),
+        backgroundColor: Colors.orange[900],
+        child: Icon(Icons.add_shopping_cart, color: Colors.white,),
+
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar : BottomBar(),
-    );
+      ),
+      );
   }
 
   void setState(Null Function() param0) {}

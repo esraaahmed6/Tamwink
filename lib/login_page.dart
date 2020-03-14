@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tamwink/maincustomer.dart';
 import 'package:flutter/material.dart';
 import 'package:tamwink/regiter_page.dart';
 // import 'package:login_app/home_page.dart';
@@ -470,7 +471,23 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             onDoubleTap :(){},
                              // Navigator.of(context).pushNamed(Repage.tag);          },
                             child: Center(
-                              child: Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              child:
+
+                              FlatButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => MyHomePage()
+                                  ));
+                                },
+                                child:
+                                Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+
+
+                                ),
+
+
+                              ),
+
                             ),
                           ),
                         ),
