@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tamwink/maincustomer.dart';
+import 'package:tamwink/customer/maincustomer.dart';
 import 'package:tamwink/admin/admin_home.dart';
 import 'package:tamwink/regiter_page.dart';
 // import 'package:login_app/home_page.dart';
@@ -476,7 +476,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                               FlatButton(
                                 onPressed: () {
                                   Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Admin()
+                                      builder: (context) => MyHomePage()
                                   ));
                                 },
                                 child:

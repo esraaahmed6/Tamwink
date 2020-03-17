@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tamwink/admin/category_admin.dart';
 import '../login_page.dart';
+import 'profile.dart';
 
 
 enum Page { dashboard, manage }
@@ -216,7 +217,9 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.people),
               title: Text("Profile"),
-              onTap: () {},
+              onTap: () {Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => DetailsScreen()
+              ));},
 
             ),
             Divider(),
