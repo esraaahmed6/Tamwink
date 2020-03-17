@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tamwink/profile.dart';
+import 'package:tamwink/customer/profile.dart';
 
 class BottomBar extends StatelessWidget
 {

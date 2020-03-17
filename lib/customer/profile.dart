@@ -13,7 +13,7 @@ class DetailsScreen extends StatelessWidget {
           //backgroundColor: Colors.amberAccent[100],
           appBar: AppBar(
 
-            title: Text('حسابي  '),
+            title: Text('حسابي'),
             backgroundColor: Colors.orange[900],
           ),
           // resizeToAvoidBottomPadding: false,
