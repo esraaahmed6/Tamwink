@@ -1,9 +1,9 @@
-import 'package:tamwink/Animation/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:tamwink/auth/regiter_page.dart';
 import 'package:tamwink/auth/login_page.dart';
 import 'package:tamwink/auth/password_page.dart';
 import 'package:tamwink/customer/maincustomer.dart';
+import 'package:tamwink/admin/admin_home.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
         '/register': (BuildContext Context)=> new Repage(),
         '/password_page':(BuildContext Context)=> new Pwpage(),
         '/home':(BuildContext Context)=> new MyHomePage(),
+        '/home_admin':(BuildContext Context)=> new Admin(),
+        '/login':(BuildContext Context)=> new LoginPage(),
       }
 
     );

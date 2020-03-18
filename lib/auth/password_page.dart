@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:login_app/home_page.dart';
-// import 'package:login_app/register_page.dart';
 class Pwpage extends StatefulWidget {
   static String tag ='pw-page';
 
@@ -18,7 +16,7 @@ class _PwpageState extends State<Pwpage> {
       dropval= va;
     });
   }
-  
+
   Widget build(BuildContext context) {
 
     return Scaffold(

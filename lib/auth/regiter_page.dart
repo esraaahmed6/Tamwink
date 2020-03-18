@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tamwink/db/customer_to_db.dart';
-// import 'package:login_app/home_page.dart';
-// import 'package:login_app/register_page.dart';
+import 'package:tamwink/auth/login_page.dart';
 class Repage extends StatefulWidget {
   static String tag ='re-page';
 
@@ -222,8 +221,21 @@ class _RepageState extends State<Repage> {
                           ),
                         ),
                         SizedBox(height: 18,),
+                        Container(
+                          child: MaterialButton(
+                            onPressed :(){
+                              Navigator.pushNamed(context,'/login');
 
-                        Text("تمتلك حساب بالفعل؟", style: TextStyle(color: Colors.grey),),
+                            },
+                            child: Center(
+                              child:    Text("تمتلك حساب بالفعل؟", style: TextStyle(color: Colors.grey),),
+                            ),
+                          ),
+                        ),
+                        ////////////////////////////////////////////////////////////////////////////////////
+                        SizedBox(height: 15.0,),
+
+
 
                       ],
                     ),

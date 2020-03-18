@@ -17,14 +17,6 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   TextEditingController passwordController = new TextEditingController();
   @override
 
-
- /* String dropval ;
-  void dropChange(String va){
-    setState(() {
-      dropval= va;
-    });
-  }*/
-
   Widget build(BuildContext context) {
 
 
@@ -153,7 +145,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                           child: GestureDetector(
                             onDoubleTap :(){},
-                             // Navigator.of(context).pushNamed(Repage.tag);          },
+
                             child: Center(
                               child:
 
