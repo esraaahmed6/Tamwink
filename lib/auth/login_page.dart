@@ -157,9 +157,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
 
                               FlatButton(
                                 onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => MyHomePage()
-                                  ));
+
+                                  FirebaseAuth.instance.signInWithEmailAndPassword(email: phoneController.text, password: passwordController.text
+                                  ).then((FirebaseUsercustomer){
+                                    Navigator.of(context).pushReplacementNamed('/home');
+                                  }).catchError((e){
+                                    print(e);
+                                  });
                                 },
                                 child:
                                 Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -173,13 +177,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             ),
                           ),
                         ),
-                        SizedBox(height: 24,),
+                        SizedBox(height: 15.0,),
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
                         Container(
                           child: MaterialButton(
                             onPressed :(){
                               Navigator.pushNamed(context, '/Repage');
-                              //Navigator.of(context).pushNamed(Repage.tag);
+
                               },
                             child: Center(
                               child: Text("التسجيل كجديد", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
