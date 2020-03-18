@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         '/landingpage':(BuildContext Context)=> new MyApp(),
         '/register': (BuildContext Context)=> new Repage(),
         '/password_page':(BuildContext Context)=> new Pwpage(),
-        '/Home':(BuildContext Context)=> new MyHomePage(),
+        '/home':(BuildContext Context)=> new MyHomePage(),
       }
 
     );

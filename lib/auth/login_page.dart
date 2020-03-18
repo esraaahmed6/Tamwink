@@ -129,18 +129,20 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             ],
                           ),
                         ),
-                        SizedBox(height: 80,),
+                        SizedBox(height: 15.0,),
                         Container(
-                          child: GestureDetector(
-                            onDoubleTap :(){
-                              Navigator.pushNamed(context, '/Pwpage');
-                            },
+
+                            child: MaterialButton(
+                              onPressed :(){
+                                Navigator.pushNamed(context,'/password_page');
+
+                              },
                             child: Center(
                               child: Text("نسيت كلمة المرور؟", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
                             ),
                           ),
                         ),
-                        SizedBox(height: 40,),
+                        SizedBox(height: 15.0,),
                         Container(
                           height: 50,
                           margin: EdgeInsets.symmetric(horizontal: 50),
@@ -182,16 +184,16 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         Container(
                           child: MaterialButton(
                             onPressed :(){
-                              Navigator.pushNamed(context, '/Repage');
+                              Navigator.pushNamed(context,'/register');
 
                               },
                             child: Center(
-                              child: Text("التسجيل كجديد", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
+                              child: Text("التسجيل كمستخدم جديد", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),),
                             ),
                           ),
                         ),
                         ////////////////////////////////////////////////////////////////////////////////////
-                        SizedBox(height: 24,),
+                        SizedBox(height: 15.0,),
 
 
                       ],

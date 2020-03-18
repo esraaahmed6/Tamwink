@@ -12,15 +12,16 @@ class Repage extends StatefulWidget {
 }
 
 class _RepageState extends State<Repage> {
+  TextEditingController phoneController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
   @override
 
-  String dropval ;
+ String dropval ;
   void dropChange(String va){
     setState(() {
       dropval= va;
     });
   }
-
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -118,31 +119,7 @@ class _RepageState extends State<Repage> {
                                   ),
                                 ),
                               ),
-                              /*Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    border: Border(bottom: BorderSide(color: Colors.grey[200]))
-                                ),
-                                child: DropdownButtonFormField(
-                                    decoration: InputDecoration(
-                                      //  labelText: 'City',
-                                        filled: true,
-                                        fillColor: Colors.white,
-                                        border: InputBorder.none,
-                                        icon: Icon(Icons.location_city,color: Colors.deepOrange),
-                                        contentPadding: EdgeInsets.all(10)
-                                    ),
-                                    hint: Text('حدد المحافظة'),
-                                    onChanged: dropChange,
-                                    value: dropval,
-                                    items: <String>['القاهرة','الجيزة']
-                                        .map<DropdownMenuItem<String>>((String value){
-                                      return DropdownMenuItem<String>(
-                                        child: Text(value),
-                                        value: value,);
-                                    }).toList()
-                                ),
-                              ),*/
+
                               Row(
                                 children: <Widget>[
                                   Expanded(
