@@ -206,7 +206,6 @@ class _RepageState extends State<Repage> {
       onChanged: radiochacked,
       activeColor: Colors.deepOrange,
       title: Text('Customer'),
-      selected: true,
     );
 
     final Ch1 = RadioListTile(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tamwink/admin/category_admin.dart';
-import '../login_page.dart';
+import '../auth/login_page.dart';
 import 'profile.dart';
 
 
