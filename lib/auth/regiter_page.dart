@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tamwink/db/customer_to_db.dart';
-import 'package:tamwink/auth/login_page.dart';
 class Repage extends StatefulWidget {
   static String tag ='re-page';
 
@@ -11,8 +10,11 @@ class Repage extends StatefulWidget {
 }
 
 class _RepageState extends State<Repage> {
+  TextEditingController nameController = new TextEditingController();
   TextEditingController phoneController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController addressController = new TextEditingController();
+  TextEditingController rationController = new TextEditingController();
   @override
 
  String dropval ;
@@ -87,7 +89,8 @@ class _RepageState extends State<Repage> {
                                   decoration: InputDecoration(
                                       hintText: "الاسم",
                                       hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none
+                                      border: InputBorder.none,
+                                      icon: Icon(Icons.people)
                                   ),
                                 ),
                               ),
@@ -101,8 +104,10 @@ class _RepageState extends State<Repage> {
                                   decoration: InputDecoration(
                                       hintText: "رقم الهاتف",
                                       hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none
+                                      border: InputBorder.none,
+                                      icon: Icon(Icons.phone)
                                   ),
+                                  controller: phoneController,
                                 ),
                               ),
                               Container(
@@ -114,8 +119,10 @@ class _RepageState extends State<Repage> {
                                   decoration: InputDecoration(
                                       hintText: "كلمة المرور",
                                       hintStyle: TextStyle(color: Colors.grey),
-                                      border: InputBorder.none
+                                      border: InputBorder.none,
+                                      icon: Icon(Icons.vpn_key)
                                   ),
+                                  controller: passwordController,
                                 ),
                               ),
 
@@ -189,6 +196,7 @@ class _RepageState extends State<Repage> {
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none
                                   ),
+                                  controller: addressController,
                                 ),
                               ),
                               Container(
@@ -203,6 +211,7 @@ class _RepageState extends State<Repage> {
                                       hintStyle: TextStyle(color: Colors.grey),
                                       border: InputBorder.none
                                   ),
+                                  controller: rationController,
                                 ),
                               ),
                             ],
@@ -216,10 +225,35 @@ class _RepageState extends State<Repage> {
                               borderRadius: BorderRadius.circular(50),
                               color: Colors.orange[900]
                           ),
-                          child: Center(
-                            child: Text("تسجيل", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                          child: GestureDetector(
+                            onDoubleTap :(){},
+
+                            child: Center(
+                              child:
+
+                              FlatButton(
+                                onPressed: () {
+
+                                  FirebaseAuth.instance.createUserWithEmailAndPassword(email: phoneController.text, password: passwordController.text)
+                                  .then((signedcustomer){
+                                   customertodb().addNewUser(signedcustomer, context);
+                                  }).catchError((e){
+                                    print(e);
+                                  });
+                                },
+                                child: Text("تسجيل", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+
+
+                                ),
+
+
+                              ),
+
+                            ),
                           ),
                         ),
+
+
                         SizedBox(height: 18,),
                         Container(
                           child: MaterialButton(
