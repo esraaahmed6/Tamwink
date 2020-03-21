@@ -147,9 +147,13 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             onDoubleTap :(){},
 
                             child: Center(
-                              child:
+                              child:MaterialButton(
+                                onPressed :(){
+                          Navigator.pushNamed(context,'/home');
 
-                              FlatButton(
+                          },
+
+                            /*  FlatButton(
                                 onPressed: () {
 
                                   FirebaseAuth.instance.signInWithEmailAndPassword(email: phoneController.text, password: passwordController.text
@@ -158,7 +162,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                                   }).catchError((e){
                                     print(e);
                                   });
-                                },
+                                },*/
                                 child:
                                 Text("تسجيل الدخول", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
 
