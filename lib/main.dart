@@ -11,8 +11,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: new LoginPage(),
+    return
+      Directionality( textDirection: TextDirection.rtl,
+
+    child:MaterialApp(
+        home: new Admin(),
+
+        //  home: new LoginPage(),
       routes: <String , WidgetBuilder>{
         '/landingpage':(BuildContext Context)=> new MyApp(),
         '/register': (BuildContext Context)=> new Repage(),
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/home_admin':(BuildContext Context)=> new Admin(),
         '/login':(BuildContext Context)=> new LoginPage(),
       }
-
+    ),
     );
   }
 }

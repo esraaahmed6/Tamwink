@@ -19,7 +19,10 @@ class _PwpageState extends State<Pwpage> {
 
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+
+    child:Scaffold(
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -120,7 +123,7 @@ class _PwpageState extends State<Pwpage> {
           ],
         ),
       ),
-    );
+    ),);
 
   }
 }

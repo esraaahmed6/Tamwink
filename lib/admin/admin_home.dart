@@ -4,7 +4,6 @@ import 'package:tamwink/admin/category_admin.dart';
 import '../auth/login_page.dart';
 import 'profile.dart';
 
-
 enum Page { dashboard, manage }
 
 class Admin extends StatefulWidget {
@@ -26,7 +25,9 @@ class _AdminState extends State<Admin> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+    child:Scaffold(
         appBar: AppBar(
           title: Row(
             children: <Widget>[
@@ -58,7 +59,7 @@ class _AdminState extends State<Admin> {
           elevation: 0.0,
           backgroundColor: Colors.white,
         ),
-        body: _loadScreen());
+        body: _loadScreen()),);
   }
 
   Widget _loadScreen() {
@@ -79,7 +80,7 @@ class _AdminState extends State<Admin> {
                     style: TextStyle(fontSize: 30.0, color: Colors.green)),
               ),
               title: Text(
-                'Revenue',
+                'الايرادات',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 24.0, color: Colors.grey),
               ),
@@ -96,7 +97,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.people_outline),
-                              label: Text("Users")),
+                              label: Text("المستخدمين")),
                           subtitle: Text(
                             '7',
                             textAlign: TextAlign.center,
@@ -111,7 +112,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.category),
-                              label: Text("Categories")),
+                              label: Text("الاقسام")),
                           subtitle: Text(
                             '23',
                             textAlign: TextAlign.center,
@@ -126,7 +127,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.track_changes),
-                              label: Text("Producs")),
+                              label: Text("المنتجات")),
                           subtitle: Text(
                             '120',
                             textAlign: TextAlign.center,
@@ -141,7 +142,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.tag_faces),
-                              label: Text("Sold")),
+                              label: Text("المبيعات")),
                           subtitle: Text(
                             '13',
                             textAlign: TextAlign.center,
@@ -156,7 +157,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.shopping_cart),
-                              label: Text("Orders")),
+                              label: Text("الطلبات")),
                           subtitle: Text(
                             '5',
                             textAlign: TextAlign.center,
@@ -171,7 +172,7 @@ class _AdminState extends State<Admin> {
                           title: FlatButton.icon(
                               onPressed: null,
                               icon: Icon(Icons.close),
-                              label: Text("Return")),
+                              label: Text("المستخدمون العائدون")),
                           subtitle: Text(
                             '0',
                             textAlign: TextAlign.center,
@@ -190,19 +191,19 @@ class _AdminState extends State<Admin> {
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.add),
-              title: Text("Add product"),
+              title: Text("اضافة منتج"),
               onTap: () {},
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.change_history),
-              title: Text("Products list"),
+              title: Text("قائمة بالمنتجات"),
               onTap: () {},
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.add_circle),
-              title: Text("Add category"),
+              title: Text("اضافة قسم"),
               onTap: () {
                 _categoryAlert();
               },
@@ -210,13 +211,13 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
               leading: Icon(Icons.category),
-              title: Text("Category list"),
+              title: Text("قائمة بالاقسام"),
               onTap: () {},
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.people),
-              title: Text("Profile"),
+              title: Text("الملف الشخصي"),
               onTap: () {Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => DetailsScreen()
               ));},
@@ -225,7 +226,7 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
               leading: Icon(Icons.exit_to_app),
-              title: Text("Log Out"),
+              title: Text("خروج"),
               onTap: () {Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => LoginPage()
               ));},
@@ -251,7 +252,7 @@ class _AdminState extends State<Admin> {
             }
           },
           decoration: InputDecoration(
-              hintText: "add category"
+              hintText: "اضافة قسم(نوع)"
           ),
         ),
       ),
@@ -260,12 +261,12 @@ class _AdminState extends State<Admin> {
           if(categoryController.text != null){
             _categoryService.createCategory(categoryController.text);
           }
-          Fluttertoast.showToast(msg: 'category created');
+          Fluttertoast.showToast(msg: 'تم اضافة قسم');
           Navigator.pop(context);
-        }, child: Text('ADD')),
+        }, child: Text('اضافة')),
         FlatButton(onPressed: (){
           Navigator.pop(context);
-        }, child: Text('CANCEL')),
+        }, child: Text('الغاء')),
 
       ],
     );

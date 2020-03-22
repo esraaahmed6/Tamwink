@@ -20,7 +20,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
 
 
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+
+    child:Scaffold(
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -201,7 +204,8 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
           ],
         ),
       ),
-    );
+    ),
+      );
 
   }
 }

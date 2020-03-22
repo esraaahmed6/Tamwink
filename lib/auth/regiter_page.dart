@@ -25,7 +25,10 @@ class _RepageState extends State<Repage> {
   }
   Widget build(BuildContext context) {
 
-    return Scaffold(
+    return
+      Directionality( textDirection: TextDirection.rtl,
+
+    child:Scaffold(
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -280,7 +283,7 @@ class _RepageState extends State<Repage> {
           ],
         ),
       ),
-    );
+    ),);
 
   }
 }
