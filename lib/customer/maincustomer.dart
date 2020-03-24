@@ -2,11 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tamwink/bottom_bar.dart';
 import 'package:tamwink/customer/Product_Page.dart';
-//import 'package:tamwink/payment.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tamwink/auth/login_page.dart';
 import 'package:tamwink/customer/order_page.dart';
 
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage ({
+    Key Key ,
+    @required this.user, FirebaseUser User
+  }): super(key: Key);
+  final FirebaseAuth user ;
 
   @override
 
@@ -28,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
+
     return
       Directionality( textDirection: TextDirection.rtl,
         child:
