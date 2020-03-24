@@ -16,6 +16,7 @@ class _RepageState extends State<Repage> {
   TextEditingController email = new TextEditingController();
   TextEditingController password = new TextEditingController();
   TextEditingController re_password = new TextEditingController();
+  TextEditingController ration_card = new TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   BuildContext context;
   AppMethods appMethod = new FirebaseMethods();
@@ -169,8 +170,27 @@ class _RepageState extends State<Repage> {
                                           controller: password,
                                         ),
                                       ),
+                                      Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border(bottom: BorderSide(
+                                                color: Colors.grey[200]))
+                                        ),
+                                        child: TextField(
+                                          // ignore: missing_return
 
-                                      Row(
+                                          decoration: InputDecoration(
+                                              hintText: "إعادةكلمة المرور",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey),
+                                              border: InputBorder.none,
+                                              icon: Icon(Icons.lock)
+                                          ),
+                                          controller: re_password,
+                                        ),
+                                      ),
+
+                                    /*  Row(
                                         children: <Widget>[
                                           Expanded(
                                               child: Container(
@@ -264,7 +284,7 @@ class _RepageState extends State<Repage> {
                                           ),
 
                                         ),
-                                      ),
+                                      ),*/
                                       Container(
                                         padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
@@ -277,9 +297,10 @@ class _RepageState extends State<Repage> {
                                               hintText: "رقم البطاقة",
                                               hintStyle: TextStyle(
                                                   color: Colors.grey),
-                                              border: InputBorder.none
+                                              border: InputBorder.none,
+                                              icon: Icon(Icons.vpn_key)
                                           ),
-
+                                          controller: ration_card,
                                         ),
                                       ),
                                     ],
@@ -367,7 +388,7 @@ class _RepageState extends State<Repage> {
       return;
     }
 
-    /*   if (re_password.text == "") {
+     if (re_password.text == "") {
             showSnackBar("Re-Password cannot be empty", scaffoldKey);
             return;
           }
@@ -376,7 +397,7 @@ class _RepageState extends State<Repage> {
             showSnackBar("Passwords don't match", scaffoldKey);
             return;
           }
-*/
+
     displayProgressDialog(context);
     String response = await appMethod.createUserAccount(
         fullname: fullname.text,

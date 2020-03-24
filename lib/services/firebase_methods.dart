@@ -13,7 +13,7 @@ class FirebaseMethods implements AppMethods {
 
   @override
   Future<String> createUserAccount(
-      {String fullname, String phone, String email, String password}) async {
+      {String fullname, String phone, String email, String password,String ration_num}) async {
     // TODO: implement createUserAccount
     FirebaseUser user;
 
@@ -32,13 +32,15 @@ class FirebaseMethods implements AppMethods {
           acctFullName: fullname,
           userEmail: email,
           userPassword: password,
-          phoneNumber: phone
+          phoneNumber: phone,
+          ration_num:ration_num
         });
 
         writeDataLocally(key: userID, value: user.uid);
         writeDataLocally(key: fullname, value: fullname);
         writeDataLocally(key: userEmail, value: userEmail);
         writeDataLocally(key: userPassword, value: password);
+        writeDataLocally(key: ration_num, value: ration_num);
       }
     } on PlatformException catch (e) {
       //print(e.details);

@@ -8,6 +8,7 @@ const String userID = "userID";
 const String acctFullName = "acctFullName";
 const String phoneNumber = "phoneNumber";
 const String userEmail = "userEmail";
+const String ration_num ="ration_num";
 const String userPassword = "userPassword";
 const String photoURL = "photoURL";
 const String loggedIN = "loggedIN";
