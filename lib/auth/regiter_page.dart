@@ -1,10 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tamwink/services/app_methods.dart';
-import 'package:tamwink/services/app_data.dart';
-import 'package:tamwink/services/app_tools.dart';
+//import 'package:tamwink/services/app_data.dart';
+//import 'package:tamwink/services/app_tools.dart';
 import 'package:tamwink/services/firebase_methods.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tamwink/customer/maincustomer.dart';
+
+
 
 class Repage extends StatefulWidget {
 
@@ -12,7 +18,10 @@ class Repage extends StatefulWidget {
   _RepageState createState() => _RepageState();
 }
 
+
 class _RepageState extends State<Repage> {
+
+  final userrefrence = Firestore.instance.collection('User');
   TextEditingController fullname = new TextEditingController();
   TextEditingController phoneNumber = new TextEditingController();
   TextEditingController email = new TextEditingController();
@@ -20,17 +29,27 @@ class _RepageState extends State<Repage> {
   TextEditingController re_password = new TextEditingController();
   TextEditingController ration_card = new TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+  // to read form
+  final _formkey = GlobalKey<FormState>();
   BuildContext context;
   AppMethods appMethod = new FirebaseMethods();
 
   @override
-  String dropval;
-
-  void dropChange(String va) {
-    setState(() {
-      dropval = va;
-    });
+  void initState() {
+    super.initState();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    fullname.dispose();
+    phoneNumber.dispose();
+    password .dispose();
+    email.dispose();
+    re_password.dispose();
+    ration_card.dispose();
+  }
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
     this.context = context;
@@ -39,6 +58,7 @@ class _RepageState extends State<Repage> {
 
         child: Scaffold(
           body: Form(
+            key: _formkey,
             child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -102,7 +122,7 @@ class _RepageState extends State<Repage> {
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child: TextField(
+                                        child:  TextFormField(
                                           // ignore: missing_return
                                           keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
@@ -113,7 +133,9 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.people)
                                           ),
                                           controller: fullname,
+                                          validator: validateName,
                                         ),
+
                                       ),
                                       Container(
                                         padding: EdgeInsets.all(10),
@@ -131,6 +153,7 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.phone)
                                           ),
                                           controller: phoneNumber,
+                                          validator: validateMobile,
                                         ),
 
                                       ),
@@ -140,7 +163,7 @@ class _RepageState extends State<Repage> {
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child: TextField(
+                                        child: TextFormField(
                                           // ignore: missing_return
 
                                           decoration: InputDecoration(
@@ -151,6 +174,7 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.email)
                                           ),
                                           controller: email,
+                                          validator: emailValidator,
                                         ),
                                       ),
                                       Container(
@@ -159,7 +183,7 @@ class _RepageState extends State<Repage> {
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child: TextField(
+                                        child: TextFormField(
                                           // ignore: missing_return
 
                                           decoration: InputDecoration(
@@ -170,6 +194,7 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.lock)
                                           ),
                                           controller: password,
+                                          validator: pwdValidator,
                                         ),
                                       ),
                                       Container(
@@ -178,7 +203,7 @@ class _RepageState extends State<Repage> {
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child: TextField(
+                                        child: TextFormField(
                                           // ignore: missing_return
 
                                           decoration: InputDecoration(
@@ -189,111 +214,18 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.lock)
                                           ),
                                           controller: re_password,
+                                          validator: pwdValidator,
                                         ),
                                       ),
 
-                                    /*  Row(
-                                        children: <Widget>[
-                                          Expanded(
-                                              child: Container(
-                                                padding: EdgeInsets.all(10),
-                                                decoration: BoxDecoration(
-                                                    border: Border(
-                                                        bottom: BorderSide(
-                                                            color: Colors
-                                                                .grey[200]))
-                                                ),
-                                                child: DropdownButtonFormField(
-                                                    decoration: InputDecoration(
-                                                      //  labelText: 'City',
-                                                        filled: true,
-                                                        fillColor: Colors.white,
-                                                        border: InputBorder
-                                                            .none,
-                                                        // icon: Icon(Icons.location_city,color: Colors.deepOrange),
-                                                        contentPadding: EdgeInsets
-                                                            .all(10)
-                                                    ),
-                                                    hint: Text('حدد المنطقة'),
-                                                    onChanged: dropChange,
-                                                    value: dropval,
-                                                    items: <String>[
-                                                      'فيصل',
-                                                      'الهرم'
-                                                    ]
-                                                        .map<DropdownMenuItem<
-                                                        String>>((
-                                                        String value) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        child: Text(value),
-                                                        value: value,);
-                                                    }).toList()
-                                                ),
-                                              )
-                                          ),
-                                          SizedBox(width: 30,),
-                                          Expanded(
-                                            child: Container(
-                                              padding: EdgeInsets.all(10),
-                                              decoration: BoxDecoration(
-                                                  border: Border(
-                                                      bottom: BorderSide(
-                                                          color: Colors
-                                                              .grey[200]))
-                                              ),
-                                              child: DropdownButtonFormField(
-                                                  decoration: InputDecoration(
-                                                    //  labelText: 'City',
-                                                      filled: true,
-                                                      fillColor: Colors.white,
-                                                      border: InputBorder.none,
-                                                      // icon: Icon(Icons.location_city,color: Colors.deepOrange),
-                                                      contentPadding: EdgeInsets
-                                                          .all(10)
-                                                  ),
-                                                  hint: Text('حدد االمحافظة'),
-                                                  onChanged: dropChange,
-                                                  value: dropval,
-                                                  items: <String>[
-                                                    'فيصل',
-                                                    'الهرم'
-                                                  ]
-                                                      .map<DropdownMenuItem<
-                                                      String>>((String value) {
-                                                    return DropdownMenuItem<
-                                                        String>(
-                                                      child: Text(value),
-                                                      value: value,);
-                                                  }).toList()
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                      ),
+
                                       Container(
                                         padding: EdgeInsets.all(10),
                                         decoration: BoxDecoration(
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child: TextField(
-                                          decoration: InputDecoration(
-                                              hintText: " العنوان (بالتفصيل)",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey),
-                                              border: InputBorder.none
-                                          ),
-
-                                        ),
-                                      ),*/
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border(bottom: BorderSide(
-                                                color: Colors.grey[200]))
-                                        ),
-                                        child: TextField(
+                                        child: TextFormField(
                                           keyboardType: TextInputType.phone,
                                           decoration: InputDecoration(
                                               hintText: "رقم البطاقة",
@@ -303,6 +235,7 @@ class _RepageState extends State<Repage> {
                                               icon: Icon(Icons.vpn_key)
                                           ),
                                           controller: ration_card,
+                                          validator: validateCard,
                                         ),
                                       ),
                                     ],
@@ -323,7 +256,66 @@ class _RepageState extends State<Repage> {
                                       child:
 
                                       FlatButton(
-                                        onPressed: verifyDetails,
+                                        onPressed: ()async{
+                                          if (_formkey.currentState.validate()) {
+
+                                            FirebaseAuth.instance
+                                                .createUserWithEmailAndPassword(
+                                                email: email.text,
+                                                password: password.text)
+                                                .then((currentUser) => Firestore.instance
+                                                .collection("User")
+                                                .document(
+                                              currentUser.user.uid,
+                                            )
+                                                .setData({
+
+
+                                              'UserName': fullname.text,
+                                              'Email': email.text,
+                                              'Password': password.text,
+                                              'ration_card': ration_card.text,
+                                              'PhoneNumber':
+                                              phoneNumber.text,
+
+                                            }).then((result) async {
+                                              setState(() {
+                                                print('add');
+
+                                              });
+
+                                              // ignore: sdk_version_set_literal
+                                              Navigator.pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MyHomePage(
+//                                                          title:
+//                                                          _UserNameController
+//                                                              .text,
+//                                                          uid: currentUser.uid,
+                                                          )),
+                                                      (_) => false);
+                                              fullname.clear();
+                                              email.clear();
+                                              password.clear();
+                                              ration_card.clear();
+                                              phoneNumber.clear();
+                                              re_password.clear();
+                                            }).catchError((err) {
+//                                              dialogBox.information(
+//                                                  context, "Error", err.toString());
+                                              print("Error =" + err.toString());
+                                            }))
+                                                .catchError((err) {
+//                                              dialogBox.information(
+//                                                  context, "Error", err.toString());
+                                              print("Error =" + err.toString());
+                                            });
+
+
+                                          }
+                                        },
 
                                         child: Text("تسجيل", style: TextStyle(
                                             color: Colors.white,
@@ -369,51 +361,106 @@ class _RepageState extends State<Repage> {
           ),
         ),);
   }
-  verifyDetails() async {
-    if (fullname.text == "") {
-      showSnackBar("Full name cannot be empty", scaffoldKey);
-      return;
+  String emailValidator(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    if (value.isEmpty) return '*Required';
+    if (!regex.hasMatch(value))
+      return '*Enter a valid email';
+    else
+      return null;
+  }
+
+  //validate username//
+  String validateName(String value) {
+    if (value.isEmpty) return 'UserName is requierd';
+    if (value.length < 3)
+      return 'Please enter a valid name .';
+    else
+      return null;
+  }
+
+
+  ///validate phoneNumber///
+  String validateMobile(String value) {
+    String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return 'Please enter mobile number';
     }
-
-    if (phoneNumber.text == "") {
-      showSnackBar("Phone cannot be empty", scaffoldKey);
-      return;
+    else if (!regExp.hasMatch(value)) {
+      return 'Please enter valid mobile number';
     }
+    return null;
+  }
 
-    if (email.text == "") {
-      showSnackBar("Email cannot be empty", scaffoldKey);
-      return;
-    }
+  ////
+  //validate cardNumber//
+  String validateCard(String value) {
+    if (value.isEmpty) return 'cardNumber is requierd';
+    if (value.length < 14 )
+      return 'Please enter a valid Card .';
+    if (value.length > 14 )
+      return 'Please enter a valid Card .';
+    else
+      return null;
+  }
 
-    if (password.text == "") {
-      showSnackBar("Password cannot be empty", scaffoldKey);
-      return;
-    }
-
-     if (re_password.text == "") {
-            showSnackBar("Re-Password cannot be empty", scaffoldKey);
-            return;
-          }
-
-          if (password.text != re_password.text) {
-            showSnackBar("Passwords don't match", scaffoldKey);
-            return;
-          }
-
-    displayProgressDialog(context);
-    String response = await appMethod.createUserAccount(
-        fullname: fullname.text,
-        phone: phoneNumber.text,
-        email: email.text.toLowerCase(),
-        password: password.text.toLowerCase());
-
-    if (response == successful) {
-      closeProgressDialog(context);
-      Navigator.of(context).pop();
-      Navigator.of(context).pop(true);
+//validate password
+  String pwdValidator(String value) {
+    if (value.isEmpty) return 'Password is requierd';
+    if (value.length < 6) {
+      return 'Password must be longer than 6 characters';
     } else {
-      closeProgressDialog(context);
-      showSnackBar(response, scaffoldKey);
+      return null;
     }
   }
+//  verifyDetails() async {
+//    if (fullname.text == "") {
+//      showSnackBar("Full name cannot be empty", scaffoldKey);
+//      return;
+//    }
+//
+//    if (phoneNumber.text == "") {
+//      showSnackBar("Phone cannot be empty", scaffoldKey);
+//      return;
+//    }
+//
+//    if (email.text == "") {
+//      showSnackBar("Email cannot be empty", scaffoldKey);
+//      return;
+//    }
+//
+//    if (password.text == "") {
+//      showSnackBar("Password cannot be empty", scaffoldKey);
+//      return;
+//    }
+//
+//    if (re_password.text == "") {
+//      showSnackBar("Re-Password cannot be empty", scaffoldKey);
+//      return;
+//    }
+//
+//    if (password.text != re_password.text) {
+//      showSnackBar("Passwords don't match", scaffoldKey);
+//      return;
+//    }
+//
+//    displayProgressDialog(context);
+//    String response = await appMethod.createUserAccount(
+//        fullname: fullname.text,
+//        phone: phoneNumber.text,
+//        email: email.text.toLowerCase(),
+//        password: password.text.toLowerCase());
+//
+//    if (response == successful) {
+//      closeProgressDialog(context);
+//      Navigator.of(context).pop();
+//      Navigator.of(context).pop(true);
+//    } else {
+//      closeProgressDialog(context);
+//      showSnackBar(response, scaffoldKey);
+//    }
+//  }
 }
