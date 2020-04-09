@@ -2,18 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tamwink/services/app_methods.dart';
-//import 'package:tamwink/services/app_data.dart';
-//import 'package:tamwink/services/app_tools.dart';
+import 'package:tamwink/admin/admin_home.dart';
 import 'package:tamwink/services/firebase_methods.dart';
-//import 'package:firebase_storage/firebase_storage.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tamwink/customer/maincustomer.dart';
 
 
 
 class Repage extends StatefulWidget {
-
+  Repage({Key key}) : super(key: key);
   @override
   _RepageState createState() => _RepageState();
 }
@@ -28,8 +25,9 @@ class _RepageState extends State<Repage> {
   TextEditingController password = new TextEditingController();
   TextEditingController re_password = new TextEditingController();
   TextEditingController ration_card = new TextEditingController();
-  TextEditingController member = new TextEditingController();
+
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+
   // to read form
   final _formkey = GlobalKey<FormState>();
   BuildContext context;
@@ -45,12 +43,12 @@ class _RepageState extends State<Repage> {
     super.dispose();
     fullname.dispose();
     phoneNumber.dispose();
-    password .dispose();
+    password.dispose();
     email.dispose();
     re_password.dispose();
     ration_card.dispose();
-    member.dispose();
   }
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   Widget build(BuildContext context) {
@@ -124,7 +122,7 @@ class _RepageState extends State<Repage> {
                                             border: Border(bottom: BorderSide(
                                                 color: Colors.grey[200]))
                                         ),
-                                        child:  TextFormField(
+                                        child: TextFormField(
                                           // ignore: missing_return
                                           keyboardType: TextInputType.text,
                                           decoration: InputDecoration(
@@ -170,12 +168,10 @@ class _RepageState extends State<Repage> {
 
                                           decoration: InputDecoration(
                                               hintText: "البريد الالكتروني",
-
                                               hintStyle: TextStyle(
                                                   color: Colors.grey),
                                               border: InputBorder.none,
                                               icon: Icon(Icons.email)
-
                                           ),
                                           controller: email,
                                           validator: emailValidator,
@@ -189,7 +185,7 @@ class _RepageState extends State<Repage> {
                                         ),
                                         child: TextFormField(
                                           // ignore: missing_return
-                                          obscureText: true ,
+
                                           decoration: InputDecoration(
                                               hintText: "كلمة المرور",
                                               hintStyle: TextStyle(
@@ -209,7 +205,7 @@ class _RepageState extends State<Repage> {
                                         ),
                                         child: TextFormField(
                                           // ignore: missing_return
-                                          obscureText: true ,
+
                                           decoration: InputDecoration(
                                               hintText: "إعادةكلمة المرور",
                                               hintStyle: TextStyle(
@@ -221,26 +217,7 @@ class _RepageState extends State<Repage> {
                                           validator: pwdValidator,
                                         ),
                                       ),
-                                      Container(
-                                        padding: EdgeInsets.all(10),
-                                        decoration: BoxDecoration(
-                                            border: Border(bottom: BorderSide(
-                                                color: Colors.grey[200]))
-                                        ),
-                                        child: TextFormField(
-                                          keyboardType: TextInputType.phone,
-                                          decoration: InputDecoration(
-                                              hintText: "عدد الأعضاء",
-                                              hintStyle: TextStyle(
-                                                  color: Colors.grey),
-                                              border: InputBorder.none,
-                                              icon: Icon(Icons.accessibility)
-                                          ),
-                                          controller: member,
-                                          //validator: validateMobile,
-                                        ),
 
-                                      ),
 
                                       Container(
                                         padding: EdgeInsets.all(10),
@@ -264,7 +241,6 @@ class _RepageState extends State<Repage> {
                                     ],
                                   ),
                                 ),
-
                                 SizedBox(height: 40,),
                                 Container(
                                   height: 50,
@@ -280,78 +256,87 @@ class _RepageState extends State<Repage> {
                                       child:
 
                                       FlatButton(
-                                        onPressed: ()async{
-                                          if (_formkey.currentState.validate()) {
-
-                                            FirebaseAuth.instance
-                                                .createUserWithEmailAndPassword(
-                                                email: email.text,
-                                                password: password.text)
-                                                .then((currentUser) => Firestore.instance
-                                                .collection("User")
-                                                .document(
-                                              currentUser.user.uid,
-                                            )
-                                                .setData({
+                                          child: Text("تسجيل", style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
 
 
-                                              'UserName': fullname.text,
-                                              'Email': email.text,
-                                              'Password': password.text,
-                                              'ration_card': ration_card.text,
-                                              'PhoneNumber':
-                                              phoneNumber.text,
-                                              'member':member.text,
+                                          ),
+                                          onPressed: () async {
+                                            if (_formkey.currentState
+                                                .validate()) {
+                                              FirebaseAuth.instance
+                                                  .createUserWithEmailAndPassword(
+                                                  email: email.text,
+                                                  password: password.text)
+                                                  .then((currentUser) =>
+                                                  Firestore.instance
+                                                      .collection("User")
+                                                      .document(
+                                                    currentUser.user.uid,
 
-                                            }).then((result) async {
-                                              setState(() {
-                                                print('add');
+                                                  )
+                                                      .setData({
 
-                                              });
+                                                    "uid": currentUser.user.uid,
+                                                    'UserName': fullname.text,
+                                                    'Email': email.text,
+                                                    'Password': password.text,
+                                                    'ration_card': ration_card
+                                                        .text,
+                                                    'PhoneNumber':
+                                                    phoneNumber.text,
 
-                                              // ignore: sdk_version_set_literal
-                                              Navigator.pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MyHomePage(
-//                                                          title:
-//                                                          _UserNameController
-//                                                              .text,
-//                                                          uid: currentUser.uid,
-                                                          )),
-                                                      (_) => false);
-                                              fullname.clear();
-                                              email.clear();
-                                              password.clear();
-                                              ration_card.clear();
-                                              phoneNumber.clear();
-                                              re_password.clear();
-                                              member.clear();
-                                            }).catchError((err) {
-//                                              dialogBox.information(
-//                                                  context, "Error", err.toString());
-                                              print("Error =" + err.toString());
-                                            }))
-                                                .catchError((err) {
-//                                              dialogBox.information(
-//                                                  context, "Error", err.toString());
-                                              print("Error =" + err.toString());
-                                            });
+                                                  }).then((result) async {
+                                                    setState(() {
+                                                      print('add');
+                                                    });
 
-
-                                          }
-                                        },
-
-                                        child: Text("تسجيل", style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-
-
-                                        ),
-
-
-                                      ),
+                                                    // ignore: sdk_version_set_literal
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (
+                                                                context) =>
+                                                                MyHomePage(
+                                                                  /*  title: fullname.text,
+                                                       uid: currentUser.user.uid,*/
+                                                                )),
+                                                            (_) => false);
+                                                    fullname.clear();
+                                                    email.clear();
+                                                    password.clear();
+                                                    ration_card.clear();
+                                                    phoneNumber.clear();
+                                                    re_password.clear();
+                                                  }).catchError((err) =>
+                                                      print(err))).catchError((
+                                                  err) => print(err));
+                                            }
+                                            else {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (
+                                                      BuildContext context) {
+                                                    return AlertDialog(
+                                                      title: Text("Error"),
+                                                      content: Text(
+                                                          "The passwords do not match"),
+                                                      actions: <Widget>[
+                                                        FlatButton(
+                                                          child: Text("Close"),
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                context)
+                                                                .pop();
+                                                          },
+                                                        )
+                                                      ],
+                                                    );
+                                                  });
+                                            }
+                                          }),
 
                                     ),
                                   ),
@@ -387,6 +372,7 @@ class _RepageState extends State<Repage> {
           ),
         ),);
   }
+
   String emailValidator(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -425,10 +411,10 @@ class _RepageState extends State<Repage> {
   //validate cardNumber//
   String validateCard(String value) {
     if (value.isEmpty) return 'cardNumber is requierd';
-    if (value.length < 14 )
+    if (value.length != 12)
       return 'Please enter a valid Card .';
-    if (value.length > 14 )
-      return 'Please enter a valid Card .';
+    /* if (value.length != 10 && value.startsWith('admin'))
+      return 'Please enter a valid Card .';*/
     else
       return null;
   }
@@ -442,51 +428,4 @@ class _RepageState extends State<Repage> {
       return null;
     }
   }
-//  verifyDetails() async {
-//    if (fullname.text == "") {
-//      showSnackBar("Full name cannot be empty", scaffoldKey);
-//      return;
-//    }
-//
-//    if (phoneNumber.text == "") {
-//      showSnackBar("Phone cannot be empty", scaffoldKey);
-//      return;
-//    }
-//
-//    if (email.text == "") {
-//      showSnackBar("Email cannot be empty", scaffoldKey);
-//      return;
-//    }
-//
-//    if (password.text == "") {
-//      showSnackBar("Password cannot be empty", scaffoldKey);
-//      return;
-//    }
-//
-//    if (re_password.text == "") {
-//      showSnackBar("Re-Password cannot be empty", scaffoldKey);
-//      return;
-//    }
-//
-//    if (password.text != re_password.text) {
-//      showSnackBar("Passwords don't match", scaffoldKey);
-//      return;
-//    }
-//
-//    displayProgressDialog(context);
-//    String response = await appMethod.createUserAccount(
-//        fullname: fullname.text,
-//        phone: phoneNumber.text,
-//        email: email.text.toLowerCase(),
-//        password: password.text.toLowerCase());
-//
-//    if (response == successful) {
-//      closeProgressDialog(context);
-//      Navigator.of(context).pop();
-//      Navigator.of(context).pop(true);
-//    } else {
-//      closeProgressDialog(context);
-//      showSnackBar(response, scaffoldKey);
-//    }
-//  }
 }
