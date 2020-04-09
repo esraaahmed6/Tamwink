@@ -28,6 +28,7 @@ class _RepageState extends State<Repage> {
   TextEditingController password = new TextEditingController();
   TextEditingController re_password = new TextEditingController();
   TextEditingController ration_card = new TextEditingController();
+  TextEditingController member = new TextEditingController();
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   // to read form
   final _formkey = GlobalKey<FormState>();
@@ -48,6 +49,7 @@ class _RepageState extends State<Repage> {
     email.dispose();
     re_password.dispose();
     ration_card.dispose();
+    member.dispose();
   }
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -168,10 +170,12 @@ class _RepageState extends State<Repage> {
 
                                           decoration: InputDecoration(
                                               hintText: "البريد الالكتروني",
+
                                               hintStyle: TextStyle(
                                                   color: Colors.grey),
                                               border: InputBorder.none,
                                               icon: Icon(Icons.email)
+
                                           ),
                                           controller: email,
                                           validator: emailValidator,
@@ -185,7 +189,7 @@ class _RepageState extends State<Repage> {
                                         ),
                                         child: TextFormField(
                                           // ignore: missing_return
-
+                                          obscureText: true ,
                                           decoration: InputDecoration(
                                               hintText: "كلمة المرور",
                                               hintStyle: TextStyle(
@@ -205,7 +209,7 @@ class _RepageState extends State<Repage> {
                                         ),
                                         child: TextFormField(
                                           // ignore: missing_return
-
+                                          obscureText: true ,
                                           decoration: InputDecoration(
                                               hintText: "إعادةكلمة المرور",
                                               hintStyle: TextStyle(
@@ -217,7 +221,26 @@ class _RepageState extends State<Repage> {
                                           validator: pwdValidator,
                                         ),
                                       ),
+                                      Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            border: Border(bottom: BorderSide(
+                                                color: Colors.grey[200]))
+                                        ),
+                                        child: TextFormField(
+                                          keyboardType: TextInputType.phone,
+                                          decoration: InputDecoration(
+                                              hintText: "عدد الأعضاء",
+                                              hintStyle: TextStyle(
+                                                  color: Colors.grey),
+                                              border: InputBorder.none,
+                                              icon: Icon(Icons.accessibility)
+                                          ),
+                                          controller: member,
+                                          //validator: validateMobile,
+                                        ),
 
+                                      ),
 
                                       Container(
                                         padding: EdgeInsets.all(10),
@@ -241,6 +264,7 @@ class _RepageState extends State<Repage> {
                                     ],
                                   ),
                                 ),
+
                                 SizedBox(height: 40,),
                                 Container(
                                   height: 50,
@@ -277,6 +301,7 @@ class _RepageState extends State<Repage> {
                                               'ration_card': ration_card.text,
                                               'PhoneNumber':
                                               phoneNumber.text,
+                                              'member':member.text,
 
                                             }).then((result) async {
                                               setState(() {
@@ -302,6 +327,7 @@ class _RepageState extends State<Repage> {
                                               ration_card.clear();
                                               phoneNumber.clear();
                                               re_password.clear();
+                                              member.clear();
                                             }).catchError((err) {
 //                                              dialogBox.information(
 //                                                  context, "Error", err.toString());
