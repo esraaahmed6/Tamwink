@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: new LoginPage(),
+        home: new Admin(),
+        //home: new LoginPage(),
         routes: <String , WidgetBuilder>{
           '/landingpage':(BuildContext Context)=> new MyApp(),
           '/register': (BuildContext Context)=> new Repage(),

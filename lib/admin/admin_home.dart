@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tamwink/admin/add_product.dart';
 import 'package:tamwink/admin/category_admin.dart';
 import '../auth/login_page.dart';
 import 'profile.dart';
@@ -27,39 +29,39 @@ class _AdminState extends State<Admin> {
   Widget build(BuildContext context) {
     return
       Directionality( textDirection: TextDirection.rtl,
-    child:Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: <Widget>[
-              Expanded(
-                  child: FlatButton.icon(
-                      onPressed: () {
-                        setState(() => _selectedPage = Page.dashboard);
-                      },
-                      icon: Icon(
-                        Icons.dashboard,
-                        color: _selectedPage == Page.dashboard
-                            ? active
-                            : notActive,
-                      ),
-                      label: Text('Dashboard'))),
-              Expanded(
-                  child: FlatButton.icon(
-                      onPressed: () {
-                        setState(() => _selectedPage = Page.manage);
-                      },
-                      icon: Icon(
-                        Icons.sort,
-                        color:
-                        _selectedPage == Page.manage ? active : notActive,
-                      ),
-                      label: Text('Manage'))),
-            ],
-          ),
-          elevation: 0.0,
-          backgroundColor: Colors.white,
-        ),
-        body: _loadScreen()),);
+        child:Scaffold(
+            appBar: AppBar(
+              title: Row(
+                children: <Widget>[
+                  Expanded(
+                      child: FlatButton.icon(
+                          onPressed: () {
+                            setState(() => _selectedPage = Page.dashboard);
+                          },
+                          icon: Icon(
+                            Icons.dashboard,
+                            color: _selectedPage == Page.dashboard
+                                ? active
+                                : notActive,
+                          ),
+                          label: Text('Dashboard'))),
+                  Expanded(
+                      child: FlatButton.icon(
+                          onPressed: () {
+                            setState(() => _selectedPage = Page.manage);
+                          },
+                          icon: Icon(
+                            Icons.sort,
+                            color:
+                            _selectedPage == Page.manage ? active : notActive,
+                          ),
+                          label: Text('Manage'))),
+                ],
+              ),
+              elevation: 0.0,
+              backgroundColor: Colors.white,
+            ),
+            body: _loadScreen()),);
   }
 
   Widget _loadScreen() {
@@ -69,7 +71,7 @@ class _AdminState extends State<Admin> {
           children: <Widget>[
             ListTile(
               subtitle: FlatButton.icon(
-                onPressed: null,
+                // onPressed: null,
                 icon: Icon(
                   Icons.attach_money,
                   size: 30.0,
@@ -192,7 +194,10 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.add),
               title: Text("اضافة منتج"),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_)=>AddProduct()));
+                // Navigator.push(context, MaterialPageRoute(builder: (_)=>FoodForm()));
+              },
             ),
             Divider(),
             ListTile(
@@ -273,8 +278,6 @@ class _AdminState extends State<Admin> {
 
     showDialog(context: context, builder: (_) => alert);
   }
-
-
 
 
 
