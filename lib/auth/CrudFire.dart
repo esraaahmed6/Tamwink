@@ -11,5 +11,11 @@ class CrudFire{
     if (auth()){
       Firestore.instance.collection('User').add(data);
     }
+    if (auth()){
+      Firestore.instance.collection('customer').add(data);
+    }
+    if (auth()){
+      Firestore.instance.collection('admin').add(data);
+    }
   }
 }
