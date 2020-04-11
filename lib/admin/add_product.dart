@@ -742,7 +742,7 @@ class _AddProductState extends State<AddProduct> {
             Navigator.pop(context);
           });
 
-      //  }
+      //  }//
         /*else{
           setState(() => isLoading = false);
           Fluttertoast.showToast(msg: 'select atleast one size');
