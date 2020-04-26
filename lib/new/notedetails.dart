@@ -34,5 +34,5 @@ class NoteDetailsPage extends StatelessWidget {
         ),
       ),
     )    );
-  }
+  }//
 }
