@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tamwink/admin/add_product.dart';
 import 'package:tamwink/admin/category_admin.dart';
+import 'package:tamwink/admin/product.dart';
+import 'package:tamwink/new/Home.dart';
 import '../auth/login_page.dart';
 import 'profile.dart';
 
@@ -18,10 +20,15 @@ class _AdminState extends State<Admin> {
   MaterialColor active = Colors.red;
   MaterialColor notActive = Colors.grey;
   TextEditingController categoryController = TextEditingController();
-  TextEditingController brandController = TextEditingController();
+  TextEditingController productController = TextEditingController();//
   GlobalKey<FormState> _categoryFormKey = GlobalKey();
-  GlobalKey<FormState> _brandFormKey = GlobalKey();
+  GlobalKey<FormState> _productFormKey = GlobalKey();//
   CategoryService _categoryService = CategoryService();
+  ProductService _productService = ProductService();//
+
+  TextEditingController productNameController = TextEditingController();
+  TextEditingController quatityController = TextEditingController();
+
 
 
 
@@ -208,9 +215,27 @@ class _AdminState extends State<Admin> {
             Divider(),
             ListTile(
               leading: Icon(Icons.add_circle),
+              title: Text("اضافة منتج جديد"),
+              onTap: () {
+                _productAlert();
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.add_circle),
               title: Text("اضافة قسم"),
               onTap: () {
                 _categoryAlert();
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.add_circle),
+              title: Text("ادارة الاقسام"),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomePage()
+                ));
               },
             ),
             Divider(),
@@ -278,7 +303,98 @@ class _AdminState extends State<Admin> {
 
     showDialog(context: context, builder: (_) => alert);
   }
+  void _productAlert() {
+    var alert = new AlertDialog(
+      content: Form(
+        key: _productFormKey,
+       child: Container(
+         child: Column(
+             children: <Widget>[
+               Expanded(
+                 child: Container(
+                   child: SingleChildScrollView(
+                     child: Padding(
+                   padding: EdgeInsets.all(30),
+                      child: Column(
+                          children: <Widget>[
+                        SizedBox(height: 60,),
+                         Container(
+                             child: Column(
+                                 children: <Widget>[
+                                   Container(
+                                     padding: EdgeInsets.all(10),
+                                     child: TextFormField(
+                                       controller: productController,
+                                       validator: (value){
+                                         if(value.isEmpty){
+                                           return 'category cannot be empty';
+                                         }
+                                       },
+                                       decoration: InputDecoration(
+                                           hintText: "اضافة منتج (جديد)"
+                                       ),
+                                     ),
+                             ),
+                                   //////////////////////////////////////////////////////////
+                                   Container(
+                                     padding: EdgeInsets.all(10),
+                                     child: TextFormField(
+                                       controller: productController,
+                                       validator: (value){
+                                         if(value.isEmpty){
+                                           return 'category cannot be empty';
+                                         }
+                                       },
+                                       decoration: InputDecoration(
+                                           hintText: "اضافة منتج (جديد)"
+                                       ),
+                                     ),
+                                   )
 
+                                 ]
+                             )
+                         )
+                          ]
+                      )
+                     ),
+                   ),
+                 ),
+               )
+             ]
+         ),
+       ),
+       /* child: TextFormField(
+          controller: productController,
+          validator: (value){
+            if(value.isEmpty){
+              return 'category cannot be empty';
+            }
+          },
+          decoration: InputDecoration(
+              hintText: "اضافة منتج (جديد)"
+          ),
+        ),*/
+      ),
+      actions: <Widget>[
+        FlatButton(onPressed: (){
+          if(productController.text != null){
+            _productService.uploadProduct(
+                productNameController.text ,
+               // quantity: int.parse(quatityController.text)
+            );
+          }
+          Fluttertoast.showToast(msg: 'تم اضافة قسم');
+          Navigator.pop(context);
+        }, child: Text('اضافة')),
+        FlatButton(onPressed: (){
+          Navigator.pop(context);
+        }, child: Text('الغاء')),
+
+      ],
+    );
+
+    showDialog(context: context, builder: (_) => alert);
+  }//
 
 
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:auto_direction/auto_direction.dart';
+import 'package:tamwink/addpage.dart';
 import 'package:tamwink/auth/regiter_page.dart';
 import 'package:tamwink/auth/login_page.dart';
 import 'package:tamwink/auth/password_page.dart';
 import 'package:tamwink/customer/maincustomer.dart';
 import 'package:tamwink/admin/admin_home.dart';
+import 'package:tamwink/new/Home.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -13,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        // home: new HomePage(),
         home: new Admin(),
         //home: new LoginPage(),
         routes: <String , WidgetBuilder>{

@@ -14,8 +14,8 @@ class ProductService{
 
     _firestore.collection(ref).document(productId).setData({
       'name' : productName,
-      'id':productId,
-      'category':category,
+    //  'id':productId,
+      //'category':category,
       'quantity': quantity,
       'price':price,
       'image':images,
@@ -33,19 +33,20 @@ import 'package:convert/convert.dart';
 class ProductService{
   Firestore _firestore = Firestore.instance;
   String ref = 'products';
+  //String productName;
+ // int quantity;
 
-  void uploadProduct({ String productName , String category , int quantity ,List sizes ,List images , double price}){
+  void uploadProduct( String productName  /*, String category , int quantity ,List images , int price*/){
     var id = Uuid();
     String productId = id.v1();
 
     _firestore.collection(ref).document(productId).setData({
       'name' : productName,
       'id':productId,
-      'category':category,
-      'quantity': quantity,
-      'price':price,
-      'image':images,
-
+    // 'category':category
+    //  'quantity': quantity,
+      //'price':price,
+      //'image':images,
     });
   }
 

@@ -354,6 +354,8 @@ class _AddProductState extends State<AddProduct> {
   ProductService productService = ProductService();
   //BrandService _brandService = BrandService();
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  TextEditingController productController  = TextEditingController();
   TextEditingController productNameController = TextEditingController();
   TextEditingController quatityController = TextEditingController();
   final priceController = TextEditingController();
@@ -609,7 +611,9 @@ class _AddProductState extends State<AddProduct> {
                 textColor: white,
                 child: Text('add product'),
                 onPressed: (){
-                  validateAndUpload();
+                 validateAndUpload();
+                 // Navigator.pop(context);
+
                 },
               )
             ],
@@ -730,14 +734,16 @@ class _AddProductState extends State<AddProduct> {
             imageUrl2 = await snapshot3.ref.getDownloadURL();
             List<String> imageList =[imageUrl1 , imageUrl2 , imageUrl3];
 
-            productService.uploadProduct(productName: productNameController.text,
-            price: double.parse(priceController.text),
-            sizes: selectedSizes,
-            images: imageList,
-            quantity: int.parse(quatityController.text));
+          productService.uploadProduct(
+             productNameController.text,
+            // price: int.parse(priceController.text),
+           // sizes: selectedSizes,
+            //images: imageList,
+           // quantity: int.parse(quatityController.text)
+            );
 
             _formKey.currentState.reset();
-            setState(() => isLoading = false);
+          setState(() => isLoading = false);
             Fluttertoast.showToast(msg: 'product added');
             Navigator.pop(context);
           });

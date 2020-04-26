@@ -43,6 +43,7 @@ dependencies:
   progress_indicators: ^0.1.5
   cached_network_image: ^2.0.0
   flutter_typeahead: ^1.8.0
+  date_format: ^1.0.8
 
 dev_dependencies:
   flutter_test:
