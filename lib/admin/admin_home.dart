@@ -5,6 +5,7 @@ import 'package:tamwink/admin/add_product.dart';
 import 'package:tamwink/admin/category_admin.dart';
 import 'package:tamwink/admin/product.dart';
 import 'package:tamwink/new/Home.dart';
+import 'package:tamwink/newproduct/home_product.dart';
 import '../auth/login_page.dart';
 import 'profile.dart';
 
@@ -226,6 +227,16 @@ class _AdminState extends State<Admin> {
               title: Text("اضافة قسم"),
               onTap: () {
                 _categoryAlert();
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.add_circle),
+              title: Text("ادارة المنتجات"),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => HomePageProduct()
+                ));
               },
             ),
             Divider(),

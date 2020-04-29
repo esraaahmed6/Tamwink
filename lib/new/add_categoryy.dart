@@ -47,6 +47,7 @@ class _AddCategoryState extends State<AddCategory>{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                ///////////////////////////////////////////////
                 TextFormField(
 //                  keyboardType: ,
                /* onEditingComplete: (){
