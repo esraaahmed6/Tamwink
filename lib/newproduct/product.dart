@@ -7,11 +7,15 @@ class Note{
   final String categoryname;
   final String description;
   final int price;
+  final int quantity;
+   String imagee;
   final String id;
 
   Note({this.categoryname ,
     this.description,
     this.price,
+    this.quantity,
+    this.imagee,
     this.id,
     // String categoryname
   });
@@ -19,12 +23,16 @@ class Note{
         categoryname=data["categoryname"],
         description=data["description"],
         price=data["price"],
+        quantity=data["quantity"],
+        imagee=data["image"],
         id=id;
   Map<String , dynamic> toMap(){
     return{
       "categoryname" :categoryname ,
       "description":description,
-      "price":price
+      "price":price,
+      "quantity":quantity,
+      "image":imagee
       // "name":name
     };
   }
