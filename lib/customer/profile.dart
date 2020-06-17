@@ -12,11 +12,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tamwink/customer/crudfile.dart';
 import './crudfile.dart';
 import 'package:progress_indicators/progress_indicators.dart';
+import './editPassword.dart';
+import './member.dart';
+import './editRationCard.dart';
+import 'package:tamwink/customer/maincustomer.dart';
+import 'product_detail.dart';
 
-//import 'dart:io';
-//import './main_drawer.dart';
-
-//class DetailsScreen extends StatelessWidget {
 class DetailsScreen extends StatefulWidget {
   @override
   _DetailsScreenState createState() => _DetailsScreenState();
@@ -28,7 +29,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
   CrudFile crud =new CrudFile();
   static const routeName= '/details-screen';
   final GlobalKey<FormState>_formState=GlobalKey<FormState>();
-  String _email,_password,_member,_card;
+  final formkey1 = GlobalKey<FormState>();
+
+
+  var  _email ,_member ,_card ,_images;
+  var _password ,_newPassword ,_confirmNewPassword ;
+  //String _email,_password,_member,_card;
   login()async{
     final formdata=_formState.currentState;
     if(formdata.validate()){
@@ -38,10 +44,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       (await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _email, password: _password,
       )) as FirebaseUser;
-      /*print(_email);
-     print(_password);
-     print(_member);
-     print(_card);*/
+
     }
   }
   addContact(){
@@ -51,7 +54,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
         'email':_email,
         'password':_password,
         'member':_member,
-        'cardnumber':_card
+        'cardnumber':_card,
+        'images':_image
 
       });
     }
@@ -70,39 +74,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
 
-// updateData
-
-  updateData(selectDoc,newValues){
-    Firestore.instance.collection('User').document(selectDoc).updateData(newValues)
-    .catchError((e){
-      print(e);
-    });
-  }
-
-  deleteData(docId){
-    Firestore.instance.collection('User').document(docId).delete().catchError((e){
-      print(e);
-    });
-  }
-
- /* Future<void> update(Map data) async {
-    final user = await FirebaseAuth.instance.currentUser();
-    return Firestore.instance.collection('User').document(user.uid).updateData(data);
-  }*/
-
 
   @override
   void initState() {
     super.initState();
     getuserdata();
-   /* this.user.uid = '';
 
-    FirebaseAuth.instance.currentUser().then((val){
-      setState(() {
-        this.user.uid= val.uid;
-        print("uid_init: $user.uid");
-      });
-    });*/
   }
 
 
@@ -119,11 +96,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
       });
     }
 
-    Future uploadPic(BuildContext context) async{
+    Future <String> uploadPic(BuildContext context) async{
       String fileName = basename(_image.path);
       StorageReference firebaseStorageRef = FirebaseStorage.instance.ref().child(fileName);
       StorageUploadTask uploadTask = firebaseStorageRef.putFile(_image);
       StorageTaskSnapshot taskSnapshot=await uploadTask.onComplete;
+      String url = await(taskSnapshot.ref.getDownloadURL());
+      return url;
       setState(() {
         print("Profile Picture uploaded");
         Scaffold.of(context).showSnackBar(SnackBar(content: Text('Profile Picture Uploaded')));
@@ -131,8 +110,35 @@ class _DetailsScreenState extends State<DetailsScreen> {
     }
 
     return new Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange[900],
+        elevation: 0.0,
+        centerTitle: true,
+        leading: IconButton(
+          icon:Icon(Icons.arrow_back,color:Colors.white),
+          onPressed: (){
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ProductDetail(
+//
+                        )),
+                    (_) => false);
+          },
+        ),
+        title: Text('تموينك',
+          style: TextStyle(
+            fontFamily: 'Varela',
+            fontSize: 20.0,
+            color:Colors.white,
+          ),
+        ),
+
+      ),
+
       body: StreamBuilder(
-          stream: Firestore.instance.collection('User').where('Email', isEqualTo: '${user.email}').snapshots(),
+          stream: Firestore.instance.collection('User').where('Email', isEqualTo: 'erao11@gmail.com').snapshots(),
 
 
           // ignore: missing_return
@@ -177,7 +183,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 child: (_image!=null)?Image.file(_image,
                                   fit: BoxFit.fill,
                                   // then
-                                ):Image.network('https://www.wepal.net/ar/uploads/2732018-073911PM-1.jpg',
+                                ):Image.network('${snapshot.data.documents[index]['images']}',
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -218,10 +224,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                   children: <Widget>[
 
                                     ListTile(
-                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){
+                                      /* trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){
                                         //Navigator.of(context).pop();
                                         // updateData(context, snapshot.data.documents[index].documentID);
-                                      }),
+                                        Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                        builder: (context) =>
+                                                 EmailPage(
+//
+                                               )),
+                                               (_) => false);
+                                          }),*/
+
                                       leading: IconButton(icon: Icon(Icons.email), onPressed: (){}),
                                       title: Text('البريد الألكترني'),
                                       subtitle:Text(
@@ -235,7 +250,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
 
                                     ListTile(
-                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){}),
+                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PassPage(
+//
+                                                    )),
+                                                (_) => false);
+                                      }),
                                       leading: IconButton(icon: Icon(Icons.vpn_key), onPressed: (){}),
                                       title: Text('كلمة السر'),
                                       subtitle:Text(
@@ -249,8 +273,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
 
                                     ListTile(
-                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){}),
-                                      leading: IconButton(icon: Icon(Icons.accessibility), onPressed: (){}),
+                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MemberPage(
+//
+                                                  )),
+                                        );
+                                      }),
+                                      leading: IconButton(icon: Icon(Icons.accessibility), onPressed: (){
+
+                                      }),
                                       title: Text('عدد الأعضاء'),
                                       subtitle: Text(
                                           '${ snapshot.data.documents[index]['member']}',
@@ -262,7 +297,16 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     ),
 
                                     ListTile(
-                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){}),
+                                      trailing: IconButton(icon: Icon(Icons.edit), onPressed: (){
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    CardPage(
+//
+                                                    )),
+                                                (_) => false);
+                                      }),
                                       leading: IconButton(icon: Icon(Icons.assignment_ind), onPressed: (){}),
                                       title: Text('رقم البطاقة'),
                                       subtitle:  Text(
@@ -285,7 +329,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           color: Colors.deepOrange,
                                           onPressed: () {
                                             // cancel button
-                                            Navigator.of(context).pop();
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)
+                                            {
+                                              return MyHomePage();
+                                            }));
                                           },
                                           elevation: 4.0,
                                           splashColor: Colors.blueGrey,
@@ -296,16 +343,43 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         ),
                                         RaisedButton(
                                           color: Colors.deepOrange,
-                                          onPressed: (){
+                                          onPressed: () async{
                                             // login,
                                             //upload picture
+                                            String imageurl= await uploadPic(context);
+                                            if (imageurl !=null){
+                                              List<String> _image =[imageurl];
+
+                                              await Firestore.instance.collection('User')
+                                                  .document("My7TqqTjXmbi6TWww5SoT3lVnK73 ").setData({
+
+                                                'images':_image
+
+                                              });
+                                            }
+                                            /*  if (formkey1.currentState.validate()) {
+                                              String imageurl= await uploadPic(context);
+                                              //print(imageurl);
+                                              List<String> _image =[imageurl];
+                                              await Firestore.instance.collection('User')
+                                                  .document("My7TqqTjXmbi6TWww5SoT3lVnK73 ").setData({
+                                               // 'member':_member,
+                                               // 'email':_email,
+                                               // 'password':_password,
+                                                //'cardnumber':_card,
+                                                'images':_image
+
+                                                  });
+
+                                            }*/
                                             uploadPic(context);
+
                                           },
 
                                           elevation: 4.0,
                                           splashColor: Colors.blueGrey,
                                           child: Text(
-                                            'Submit',
+                                            'upload photo',
                                             style: TextStyle(color: Colors.white, fontSize: 16.0),
                                           ),
                                         ),
