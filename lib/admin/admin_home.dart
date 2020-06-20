@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tamwink/admin/add_product.dart';
 import 'package:tamwink/admin/category_admin.dart';
 import 'package:tamwink/admin/product.dart';
+import 'package:tamwink/admin/search_products.dart';
 import 'package:tamwink/new/Home.dart';
 import 'package:tamwink/newproduct/home_product.dart';
 import '../auth/login_page.dart';
@@ -21,55 +21,75 @@ class _AdminState extends State<Admin> {
   MaterialColor active = Colors.red;
   MaterialColor notActive = Colors.grey;
   TextEditingController categoryController = TextEditingController();
-  TextEditingController productController = TextEditingController();//
+  TextEditingController productController = TextEditingController(); //
   GlobalKey<FormState> _categoryFormKey = GlobalKey();
-  GlobalKey<FormState> _productFormKey = GlobalKey();//
+  GlobalKey<FormState> _productFormKey = GlobalKey(); //
   CategoryService _categoryService = CategoryService();
-  ProductService _productService = ProductService();//
+  ProductService _productService = ProductService(); //
 
   TextEditingController productNameController = TextEditingController();
   TextEditingController quatityController = TextEditingController();
 
-
-
-
   @override
   Widget build(BuildContext context) {
-    return
-      Directionality( textDirection: TextDirection.rtl,
-        child:Scaffold(
-            appBar: AppBar(
-              title: Row(
-                children: <Widget>[
-                  Expanded(
-                      child: FlatButton.icon(
-                          onPressed: () {
-                            setState(() => _selectedPage = Page.dashboard);
-                          },
-                          icon: Icon(
-                            Icons.dashboard,
-                            color: _selectedPage == Page.dashboard
-                                ? active
-                                : notActive,
-                          ),
-                          label: Text('Dashboard'))),
-                  Expanded(
-                      child: FlatButton.icon(
-                          onPressed: () {
-                            setState(() => _selectedPage = Page.manage);
-                          },
-                          icon: Icon(
-                            Icons.sort,
-                            color:
-                            _selectedPage == Page.manage ? active : notActive,
-                          ),
-                          label: Text('Manage'))),
-                ],
-              ),
-              elevation: 0.0,
-              backgroundColor: Colors.white,
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+          appBar: AppBar(
+            title: Row(
+              children: <Widget>[
+                Expanded(
+                    child: FlatButton.icon(
+                        onPressed: () {
+                          setState(() => _selectedPage = Page.dashboard);
+                        },
+                        icon: Icon(
+                          Icons.dashboard,
+                          color: _selectedPage == Page.dashboard
+                              ? active
+                              : notActive,
+                        ),
+                        label: Text('Dashboard'))),
+                Expanded(
+                    child: FlatButton.icon(
+                        onPressed: () {
+                          setState(() => _selectedPage = Page.manage);
+                        },
+                        icon: Icon(
+                          Icons.sort,
+                          color:
+                              _selectedPage == Page.manage ? active : notActive,
+                        ),
+                        label: Text('Manage'))),
+              ],
             ),
-            body: _loadScreen()),);
+            elevation: 0.0,
+            actions: [
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 8.0, right: 8.0, bottom: 8.0),
+                child: Ink(
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20.0),
+                          bottomRight: Radius.circular(20.0))),
+                  child: IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(
+                        context: context,
+                        delegate: ProductSearch(),
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+            backgroundColor: Colors.white,
+          ),
+          body: _loadScreen()),
+    );
   }
 
   Widget _loadScreen() {
@@ -203,7 +223,8 @@ class _AdminState extends State<Admin> {
               leading: Icon(Icons.add),
               title: Text("اضافة منتج"),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_)=>AddProduct()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => AddProduct()));
                 // Navigator.push(context, MaterialPageRoute(builder: (_)=>FoodForm()));
               },
             ),
@@ -234,9 +255,8 @@ class _AdminState extends State<Admin> {
               leading: Icon(Icons.add_circle),
               title: Text("ادارة المنتجات"),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomePageProduct()
-                ));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => HomePageProduct()));
               },
             ),
             Divider(),
@@ -244,9 +264,8 @@ class _AdminState extends State<Admin> {
               leading: Icon(Icons.add_circle),
               title: Text("ادارة الاقسام"),
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => HomePage()
-                ));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => HomePage()));
               },
             ),
             Divider(),
@@ -259,18 +278,19 @@ class _AdminState extends State<Admin> {
             ListTile(
               leading: Icon(Icons.people),
               title: Text("الملف الشخصي"),
-              onTap: () {Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => DetailsScreen()
-              ));},
-
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => DetailsScreen()));
+              },
             ),
             Divider(),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text("خروج"),
-              onTap: () {Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => LoginPage()
-              ));},
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => LoginPage()));
+              },
             ),
             Divider(),
           ],
@@ -287,94 +307,87 @@ class _AdminState extends State<Admin> {
         key: _categoryFormKey,
         child: TextFormField(
           controller: categoryController,
-          validator: (value){
-            if(value.isEmpty){
+          validator: (value) {
+            if (value.isEmpty) {
               return 'category cannot be empty';
             }
           },
-          decoration: InputDecoration(
-              hintText: "اضافة قسم(نوع)"
-          ),
+          decoration: InputDecoration(hintText: "اضافة قسم(نوع)"),
         ),
       ),
       actions: <Widget>[
-        FlatButton(onPressed: (){
-          if(categoryController.text != null){
-            _categoryService.createCategory(categoryController.text);
-          }
-          Fluttertoast.showToast(msg: 'تم اضافة قسم');
-          Navigator.pop(context);
-        }, child: Text('اضافة')),
-        FlatButton(onPressed: (){
-          Navigator.pop(context);
-        }, child: Text('الغاء')),
-
+        FlatButton(
+            onPressed: () {
+              if (categoryController.text != null) {
+                _categoryService.createCategory(categoryController.text);
+              }
+              Fluttertoast.showToast(msg: 'تم اضافة قسم');
+              Navigator.pop(context);
+            },
+            child: Text('اضافة')),
+        FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('الغاء')),
       ],
     );
 
     showDialog(context: context, builder: (_) => alert);
   }
+
   void _productAlert() {
     var alert = new AlertDialog(
       content: Form(
         key: _productFormKey,
-       child: Container(
-         child: Column(
-             children: <Widget>[
-               Expanded(
-                 child: Container(
-                   child: SingleChildScrollView(
-                     child: Padding(
-                   padding: EdgeInsets.all(30),
-                      child: Column(
-                          children: <Widget>[
-                        SizedBox(height: 60,),
-                         Container(
-                             child: Column(
-                                 children: <Widget>[
-                                   Container(
-                                     padding: EdgeInsets.all(10),
-                                     child: TextFormField(
-                                       controller: productController,
-                                       validator: (value){
-                                         if(value.isEmpty){
-                                           return 'category cannot be empty';
-                                         }
-                                       },
-                                       decoration: InputDecoration(
-                                           hintText: "اضافة منتج (جديد)"
-                                       ),
-                                     ),
-                             ),
-                                   //////////////////////////////////////////////////////////
-                                   Container(
-                                     padding: EdgeInsets.all(10),
-                                     child: TextFormField(
-                                       controller: productController,
-                                       validator: (value){
-                                         if(value.isEmpty){
-                                           return 'category cannot be empty';
-                                         }
-                                       },
-                                       decoration: InputDecoration(
-                                           hintText: "اضافة منتج (جديد)"
-                                       ),
-                                     ),
-                                   )
-
-                                 ]
-                             )
-                         )
-                          ]
-                      )
-                     ),
-                   ),
-                 ),
-               )
-             ]
-         ),
-       ),
-       /* child: TextFormField(
+        child: Container(
+          child: Column(children: <Widget>[
+            Expanded(
+              child: Container(
+                child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.all(30),
+                      child: Column(children: <Widget>[
+                        SizedBox(
+                          height: 60,
+                        ),
+                        Container(
+                            child: Column(children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: TextFormField(
+                              controller: productController,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'category cannot be empty';
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  hintText: "اضافة منتج (جديد)"),
+                            ),
+                          ),
+                          //////////////////////////////////////////////////////////
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            child: TextFormField(
+                              controller: productController,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'category cannot be empty';
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  hintText: "اضافة منتج (جديد)"),
+                            ),
+                          )
+                        ]))
+                      ])),
+                ),
+              ),
+            )
+          ]),
+        ),
+        /* child: TextFormField(
           controller: productController,
           validator: (value){
             if(value.isEmpty){
@@ -387,25 +400,27 @@ class _AdminState extends State<Admin> {
         ),*/
       ),
       actions: <Widget>[
-        FlatButton(onPressed: (){
-          if(productController.text != null){
-            _productService.uploadProduct(
-                productNameController.text ,
-               // quantity: int.parse(quatityController.text)
-            );
-          }
-          Fluttertoast.showToast(msg: 'تم اضافة قسم');
-          Navigator.pop(context);
-        }, child: Text('اضافة')),
-        FlatButton(onPressed: (){
-          Navigator.pop(context);
-        }, child: Text('الغاء')),
-
+        FlatButton(
+            onPressed: () {
+              if (productController.text != null) {
+                _productService.uploadProduct(
+                  productNameController.text,
+                  // quantity: int.parse(quatityController.text)
+                );
+              }
+              Fluttertoast.showToast(msg: 'تم اضافة قسم');
+              Navigator.pop(context);
+            },
+            child: Text('اضافة')),
+        FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('الغاء')),
       ],
     );
 
     showDialog(context: context, builder: (_) => alert);
-  }//
-
+  } //
 
 }
