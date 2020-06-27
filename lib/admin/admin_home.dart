@@ -7,6 +7,7 @@ import 'package:tamwink/admin/search_products.dart';
 import 'package:tamwink/new/Home.dart';
 import 'package:tamwink/newproduct/home_product.dart';
 import '../auth/login_page.dart';
+import 'inventory.dart';
 import 'profile.dart';
 
 enum Page { dashboard, manage }
@@ -281,6 +282,15 @@ class _AdminState extends State<Admin> {
               onTap: () {
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => DetailsScreen()));
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.store),
+              title: Text("لمخزن"),
+              onTap: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Inventory()));
               },
             ),
             Divider(),
