@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tamwink/auth/login_page.dart';
 import 'package:tamwink/customer/order_page.dart';
 
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage ({
     Key Key ,
@@ -24,6 +23,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
             actions: <Widget>[
               IconButton(
                 icon:Icon(Icons.notifications_none,color:Colors.white),
-                onPressed: (){},
+                onPressed: (){}
               ),
             ],
           ),
@@ -133,9 +133,7 @@ class _MyHomePageState extends State<MyHomePage>
               icon: Icon(Icons.add_shopping_cart),
               color: Colors.white,
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OrderPage()
-                ));
+                Navigator.pushNamed(context, '/cart');
               },
             ),
             //Tab(icon: Icon(Icons.add_shopping_cart)),

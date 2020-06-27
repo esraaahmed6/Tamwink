@@ -97,7 +97,7 @@ class _OrderPageState extends State<OrderPage> {
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "20 جنية",
+                "00 جنية",
                 style: TextStyle(
                     color: Colors.red,
                     fontSize: 16.0,
@@ -162,17 +162,7 @@ class _OrderPageState extends State<OrderPage> {
             height: 20.0,
           ),
           GestureDetector(
-//            onTap: () {
-//              //Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => SignInPage()));
-//            },
-//            child: Container(
-//
-//              height: 50.0,
-//              decoration: BoxDecoration(
-//                color: Theme.of(context).primaryColor,
-//                borderRadius: BorderRadius.circular(35.0),
-//              ),
-//              child: Container(
+
 
                 child: FlatButton.icon(
                   icon: Icon(Icons.attach_money,color: Colors.white,),
@@ -194,10 +184,6 @@ class _OrderPageState extends State<OrderPage> {
                     fontWeight: FontWeight.bold,),
                   ),
                 ),
-
-//              ),
-//
-//            ),
 
          ),
           SizedBox(

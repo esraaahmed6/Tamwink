@@ -36,12 +36,13 @@ class ProductSearch extends SearchDelegate<ProductService> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return ListView(
-        children: getSuggestions(query).map<ListTile>(
-          ('productName') => ListTile(
-          title: ,
-        )
-    ),);
+    return Container(
+//        children: getSuggestions(query).map<ListTile>(
+//          ('productName') => ListTile(
+//          title: ,
+//        )
+    );
+   // );
 
   }
 

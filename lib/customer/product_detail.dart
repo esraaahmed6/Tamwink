@@ -12,7 +12,7 @@ class ProductDetail extends StatelessWidget
     this.productprice,
 }
       );
-  int _quantity = 1;
+
   @override
   Widget build(BuildContext context) {
     return
@@ -93,50 +93,10 @@ class ProductDetail extends StatelessWidget
             margin: EdgeInsets.only(top: 10, bottom: 25),
             child: Column(
               children: <Widget>[
-                Container(
-                  child: Text('الكمية'
-                      //, style: h6
-                  ),
-                  margin: EdgeInsets.only(bottom: 15),
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      color: Colors.orange[900],
-                      width: 55,
-                      height: 45,
-                      child: OutlineButton(
-                        onPressed: () {
-                          setState(() {
-                            _quantity += 1;
-                          });
-                        },
-                        child: Icon(Icons.add,color: Colors.white,),
-                      ),
-                    ),
-                    Container(
-                      margin:
-                      EdgeInsets.only(left: 20, right: 20),
-                      child: Text(_quantity.toString(),
-                        //  style: h3
-                      ),
-                    ),
-                    Container(
-                      color: Colors.orange[900],
-                      width: 55,
-                      height: 45,
-                      child: OutlineButton(
-                        onPressed: () {
-                          setState(() {
-                            if(_quantity == 1) return;
-                            _quantity -= 1;
-                          });
-                        },
-                        child: Icon(Icons.remove,color: Colors.white,),
-                      ),
-                    )
                   ],
                 )
               ],
